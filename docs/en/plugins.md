@@ -107,6 +107,11 @@ const logger = createLogger({
     // `mutation` is a `{ type, payload }`
     return mutation.type !== "aBlacklistedMutation"
   },
+  actionFilter (action, state) {
+    // same as `filter` but for actions
+    // `action` is a `{ type, payload }`
+    return action.type !== "aBlacklistedAction"
+  },
   transformer (state) {
     // transform the state before logging it.
     // for example return only a specific sub-tree
@@ -116,7 +121,13 @@ const logger = createLogger({
     // mutations are logged in the format of `{ type, payload }`
     // we can format it any way we want.
     return mutation.type
-  }
+  },
+  actionTransformer (action) {
+    // Same as mutationTransformer but for actions
+    return action.type
+  },
+  logActions: false,
+  logMutations: true
 })
 ```
 
